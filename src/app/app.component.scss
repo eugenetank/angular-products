@@ -1,0 +1,17 @@
+nav {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #0066ff;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 100px;
+  margin: 10px;
+}

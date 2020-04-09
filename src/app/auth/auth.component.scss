@@ -1,0 +1,15 @@
+.wrapper {
+  padding: 15px;
+  margin: 15px;
+}
+
+.validation-error input {
+  border: 1px solid red;
+};
+
+@media (min-width: 992px) {
+  .wrapper {
+    width: 60%;
+    margin: auto;
+  }
+}
