@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { TestingApiService } from '../services/data/testing-api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  providers: [TestingApiService],
+  providers: [ApiService],
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
   };
   loginForm: FormGroup;
 
-  constructor(private api: TestingApiService) {}
+  constructor(private api: ApiService) {}
 
   onSubmit() {
     const { username, password } = this.loginForm.value;
@@ -24,13 +24,14 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.loginForm = new FormGroup({
-     username: new FormControl(this.userCredentials.username, Validators.required),
-     password: new FormControl(this.userCredentials.password, [
-       Validators.required,
-       Validators.minLength(8),
-     ]),
-   });
+    this.loginForm = new FormGroup({
+      username: new FormControl(this.userCredentials.username, Validators.required),
+      password: new FormControl(this.userCredentials.password, [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
+  
   }
 
   get username() { return this.loginForm.get('username'); }
