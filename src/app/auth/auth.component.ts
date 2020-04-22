@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { TestingApiService } from '../services/data/testing-api.service';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
+  providers: [TestingApiService],
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
@@ -13,8 +16,11 @@ export class AuthComponent implements OnInit {
   };
   loginForm: FormGroup;
 
+  constructor(private api: TestingApiService) {}
+
   onSubmit() {
-    console.warn(this.loginForm.value);
+    const { username, password } = this.loginForm.value;
+    this.api.userAuthenticate(username, password).subscribe(console.log);
   }
 
   ngOnInit(): void {

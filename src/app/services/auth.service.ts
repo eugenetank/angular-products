@@ -1,9 +1,31 @@
 import { Injectable } from '@angular/core';
 
+RECORD_NAME = 'session';
+
+export interface UserToken {
+  name: string;
+  access: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthenticated: boolean = false;
 
-  constructor() { }
+  constructor() {
+    this.readUser();
+  }
+
+  saveUser(token: UserToken) {
+    if (!token) return;
+    localStorage.setItem(RECORD_NAME, JSON.stringify(token));
+  }
+  
+  readUser(): UserToken | null {
+    const user = localStorage.getItem(RECORD_NAME);
+    this.isAuthenticated = !!user;
+    return user ? JSON.parse(user) : null;
+  }
+
 }

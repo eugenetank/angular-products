@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <h1>Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="username">Email address</label>
@@ -26,7 +27,6 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Sign In</button>
   </form>
 </div>
-<pre>{{ loginForm.errors | json}}</pre>
