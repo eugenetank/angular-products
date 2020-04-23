@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ApiService } from '../services/data/api.service';
-import { Api } from '../services/data/api';
+import { Api, APIList } from '../services/data/api';
 
 import { UserCredentials } from '../models/user-credentials.model';
 
@@ -19,13 +19,18 @@ export class AuthComponent implements OnInit {
   };
   loginForm: FormGroup;
 
-  private backend: Api;
+  private _backend: Api;
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    private injector: Injector,
+  ) {}
 
   onSubmit() {
     const { username, password } = this.loginForm.value;
-    this.backend.userAuthenticate(username, password).subscribe(console.log);
+    this._backend.userAuthenticate(username, password).subscribe(response => {
+      console.log(response);
+    });
   }
 
   ngOnInit(): void {
@@ -36,7 +41,11 @@ export class AuthComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
-    this.backend = this.api.moduleAPI;
+    if (!this.api.moduleAPI) {
+      this.api.setApi(APIList.Smk);
+    }
+    const injectable = this.api.moduleAPI;
+    this._backend = this.injector.get(injectable);
   }
 
   get username() { return this.loginForm.get('username'); }

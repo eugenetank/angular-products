@@ -1,7 +1,7 @@
 <nav>
-  <button>Sign In</button>
-  <span>Hi, {{ 'username' }}!</span>
-  <button>Sign Out</button>
+  <button *ngIf="!isAuthenticated">Sign In</button>
+  <span *ngIf="isAuthenticated">Hi, {{ userName }}!</span>
+  <button *ngIf="isAuthenticated">Sign Out</button>
 </nav>
 <router-outlet></router-outlet>
 

@@ -13,5 +13,4 @@ export class ApiService {
   setApi(value) {
     this.moduleAPI = this.apiMap.get(value);
   }
-  constructor() { }
 }

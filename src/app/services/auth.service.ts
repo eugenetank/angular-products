@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-RECORD_NAME = 'session';
+const RECORD_NAME = 'session';
 
 export interface UserToken {
   name: string;
@@ -20,6 +20,7 @@ export class AuthService {
   saveUser(token: UserToken) {
     if (!token) return;
     localStorage.setItem(RECORD_NAME, JSON.stringify(token));
+    this.isAuthenticated = true;
   }
   
   readUser(): UserToken | null {
