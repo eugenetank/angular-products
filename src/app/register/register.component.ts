@@ -7,29 +7,29 @@ import { Api } from '../services/data/api';
 import { UserCredentials } from '../models/user-credentials.model';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   providers: [ApiService],
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./register.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   userCredentials: UserCredentials = {
     username: '',
     password: '',
   };
-  loginForm: FormGroup;
+  registerForm: FormGroup;
 
   private backend: Api;
 
   constructor(private api: ApiService) {}
 
   onSubmit() {
-    const { username, password } = this.loginForm.value;
-    this.backend.userAuthenticate(username, password).subscribe(console.log);
+    const { username, password } = this.registerForm.value;
+    this.backend.userRegister(username, password).subscribe(console.log);
   }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
+    this.registerForm = new FormGroup({
       username: new FormControl(this.userCredentials.username, Validators.required),
       password: new FormControl(this.userCredentials.password, [
         Validators.required,
@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
     this.backend = this.api.moduleAPI;
   }
 
-  get username() { return this.loginForm.get('username'); }
-  get password() { return this.loginForm.get('password'); }
+  get username() { return this.registerForm.get('username'); }
+  get password() { return this.registerForm.get('password'); }
 
 }

@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <h1>Register a New User</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Email address</label>
+      <input class="form-control" id="username" formControlName="username">
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors.required">
+          <small class="form-text text-danger">Username is required.</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">
+          <small class="form-text text-danger">Password is required.</small>
+        </div>
+        <div *ngIf="password.errors.minlength">
+          <small class="form-text text-danger">Password must be at least 8 characters long.</small>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+  </form>
+</div>
+
