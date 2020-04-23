@@ -3,13 +3,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ApiService } from '../services/data/api.service';
 import { Api, APIList } from '../services/data/api';
+import { AuthService, UserToken } from '../services/auth.service';
 
 import { UserCredentials } from '../models/user-credentials.model';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  providers: [ApiService],
+  providers: [ApiService, AuthService],
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
@@ -18,18 +19,29 @@ export class AuthComponent implements OnInit {
     password: '',
   };
   loginForm: FormGroup;
+  serverMessage: string;
 
   private _backend: Api;
 
   constructor(
     private api: ApiService,
+    private auth: AuthService,
     private injector: Injector,
   ) {}
 
   onSubmit() {
     const { username, password } = this.loginForm.value;
     this._backend.userAuthenticate(username, password).subscribe(response => {
-      console.log(response);
+      if (!response.success) {
+        this.serverMessage = response.message ? response.message : 'Something went wrong';
+        return null;
+        // TODO: display error on the page
+      }
+      const sessionInfo: UserToken = {
+        name: username,
+        access: response.token,
+      };
+      this.auth.saveUser(sessionInfo);
     });
   }
 

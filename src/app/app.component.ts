@@ -13,7 +13,6 @@ export class AppComponent {
   userName: string;
 
   constructor (
-    private api: ApiService,
     private auth: AuthService) {}
 
   ngOnInit() {
