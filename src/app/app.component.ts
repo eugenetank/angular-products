@@ -15,7 +15,7 @@ import { filter, pluck } from 'rxjs/operators';
 export class AppComponent {
   isAuthenticated: boolean;
   userName: string;
-  urlSubcription: any;
+  urlSubscription: any;
   routePath: string;
 
   constructor (
@@ -41,7 +41,7 @@ export class AppComponent {
         filter(event => event instanceof NavigationEnd),
         pluck('url'),
       )
-      .subscribe(event => {
+      .subscribe((event: string) => {
         this.routePath = event;
       });
   }
