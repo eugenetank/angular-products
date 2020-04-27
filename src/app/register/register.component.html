@@ -2,7 +2,7 @@
   <h1>Register a New User</h1>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="username">Email address</label>
+      <label for="username">Username</label>
       <input class="form-control" id="username" formControlName="username">
       <div *ngIf="username.invalid && (username.dirty || username.touched)">
         <div *ngIf="username.errors.required">
@@ -29,5 +29,6 @@
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
   </form>
+  <p class="text-center mt-4">Already have an account? <a routerLink="/auth">Sign In</a></p>
 </div>
 

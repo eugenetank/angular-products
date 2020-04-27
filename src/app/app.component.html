@@ -1,7 +1,12 @@
 <nav>
-  <button *ngIf="!isAuthenticated">Sign In</button>
-  <span *ngIf="isAuthenticated">Hi, {{ userName }}!</span>
-  <button *ngIf="isAuthenticated">Sign Out</button>
+  <div *ngIf="!isAuthenticated" class="get-auth">
+    <button *ngIf="!signInRoute" routerLink="/auth">Sign In</button>
+    <button *ngIf="!signUpRoute" routerLink="/register">Sign Up</button>
+  </div>
+  <div *ngIf="isAuthenticated" class="welcome">
+    <span>Hi, {{ userName }}!</span>
+    <button (click)="signOut()">Sign Out</button>
+  </div>
 </nav>
 <router-outlet></router-outlet>
 

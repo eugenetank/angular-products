@@ -2,7 +2,7 @@
   <h1>Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="username">Email address</label>
+      <label for="username">Username</label>
       <input class="form-control" id="username" formControlName="username">
       <div *ngIf="username.invalid && (username.dirty || username.touched)">
         <div *ngIf="username.errors.required">
@@ -27,6 +27,8 @@
         </div>
       </div>
     </div>
+    <div *ngIf="serverMessage"><p class="text-danger">{{ serverMessage }}</p></div>
     <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Sign In</button>
   </form>
+  <p class="text-center mt-4">Not registered yet? <a routerLink="/register">Sign up</a></p>
 </div>

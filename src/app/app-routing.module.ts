@@ -6,10 +6,11 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/product-list', pathMatch: 'full' },
   { path: 'product-list', component: ProductListComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/product-list', pathMatch: 'full' },
+  { path: '**', redirectTo: '/product-list' },
 ];
 
 @NgModule({
@@ -17,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

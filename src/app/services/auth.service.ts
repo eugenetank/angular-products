@@ -29,4 +29,9 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  signOut() {
+    this.isAuthenticated = false;
+    localStorage.clear();
+  }
 }
+
